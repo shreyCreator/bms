@@ -1,8 +1,8 @@
-package bms.heartbeat.repositories;
+package bms.repositories;
 
 import java.time.LocalDateTime;
 
-import bms.heartbeat.models.HeartBeatModel;
+import bms.models.HeartBeatModel;
 import jakarta.inject.Singleton;
 
 @Singleton

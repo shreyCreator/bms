@@ -1,13 +1,13 @@
-package bms.heartbeat.services;
+package bms.services;
 
 import java.time.format.DateTimeFormatter;
 
-import bms.heartbeat.models.HeartBeatModel;
-import bms.heartbeat.repositories.HeartBeatRepository;
+import bms.exceptions.TestException;
+import bms.models.HeartBeatModel;
+import bms.repositories.HeartBeatRepository;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
-//TO-ASK: When to use singleton
 @Singleton
 public class HeartBeatService {
 
@@ -15,12 +15,12 @@ public class HeartBeatService {
     HeartBeatRepository heartBeatRepository;
 
     public String getheartbeat() {
-        HeartBeatModel heartBeatModel = heartBeatRepository.getHeartbeat();
 
+        HeartBeatModel heartBeatModel = heartBeatRepository.getHeartbeat();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         String formatedDateTime = dtf.format(heartBeatModel.currentDateTime);
-
         return formatedDateTime;
+
     }
 
 }
