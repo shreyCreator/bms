@@ -4,6 +4,7 @@ import io.micronaut.context.annotation.Replaces;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MutableHttpResponse;
+import io.micronaut.http.annotation.Error;
 import io.micronaut.security.authentication.AuthorizationException;
 import io.micronaut.security.authentication.DefaultAuthorizationExceptionHandler;
 import jakarta.inject.Singleton;
@@ -14,9 +15,9 @@ import static io.micronaut.http.HttpStatus.UNAUTHORIZED;
 
 @Singleton
 @Replaces(DefaultAuthorizationExceptionHandler.class)
-public class DefaultAuthorizationExceptionHandlerReplacement extends
-        DefaultAuthorizationExceptionHandler {
+public class DefaultAuthorizationExceptionHandlerReplacement extends DefaultAuthorizationExceptionHandler {
 
+    @Error(global = true, exception = AuthorizationException.class)
     @Override
     protected MutableHttpResponse<?> httpResponseWithStatus(HttpRequest request,
             AuthorizationException e) {

@@ -1,36 +1,34 @@
 package bms.exceptionHandlers;
 
 import bms.exceptions.TestException;
-import io.micronaut.context.annotation.Requires;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Error;
-import io.micronaut.http.annotation.Produces;
-import io.micronaut.http.server.exceptions.ExceptionHandler;
+import io.micronaut.http.hateoas.JsonError;
+import io.micronaut.http.hateoas.Link;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
+@Controller
 @Singleton
 @Slf4j
-public class GlobalExceptionHandler implements ExceptionHandler<Exception, HttpResponse> {
+public class GlobalExceptionHandler {
 
-    @Error(global = true, exception = ArithmeticException.class)
-    public HttpResponse<String> handle(HttpRequest request, ArithmeticException e) {
-        log.info("hi");
-        return HttpResponse.serverError()
-                .body("error");
+    @Error(exception = ArithmeticException.class, global = true) //
+    public HttpResponse<String> error(HttpRequest request, ArithmeticException e) {
+        log.info(e.toString());
+
+        return HttpResponse.<String>serverError()
+                .body("airthmatic exception"); //
     }
 
-    @Error(exception = TestException.class)
-    public HttpResponse<String> handle(HttpRequest request, TestException exception) {
-        exception.printStackTrace();
-        return HttpResponse.serverError(exception.getMessage());
-    }
+    @Error(exception = TestException.class, global = true) //
+    public HttpResponse<String> Testexception(HttpRequest request, TestException e) {
+        log.info(e.getMessage());
 
-    @Override
-    public HttpResponse handle(HttpRequest request, Exception exception) {
-        // TODO Auto-generated method stub
-        return null;
+        return HttpResponse.<String>serverError()
+                .body("Test exception"); //
     }
 
 }

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import bms.exceptions.TestException;
 import bms.models.HeartBeatModel;
 import bms.repositories.HeartBeatRepository;
+import io.micronaut.security.authentication.AuthorizationException;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
