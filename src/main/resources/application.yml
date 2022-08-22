@@ -10,6 +10,16 @@ micronaut:
             generator:
               secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:pleaseChangeThisSecretForANewOne}"'
 
+datasources:
+  default:
+    db-type: postgresql
+    url: jdbc:postgresql://localhost:5432/bms_micronaut
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: shrey
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES
+
 netty:
   default:
     allocator:

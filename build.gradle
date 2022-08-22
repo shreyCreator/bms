@@ -21,7 +21,6 @@ dependencies {
     implementation("io.micronaut.security:micronaut-security")
      runtimeOnly("ch.qos.logback:logback-classic")
      implementation("io.micronaut:micronaut-validation")
-     testAnnotationProcessor("io.micronaut.spring:micronaut-spring-annotation")
 
       implementation("io.micronaut.data:micronaut-data-jdbc")
      
@@ -30,6 +29,7 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    runtimeOnly("org.postgresql:postgresql")
     
 	
 
