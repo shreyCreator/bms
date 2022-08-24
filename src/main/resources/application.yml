@@ -16,7 +16,7 @@ datasources:
     url: jdbc:postgresql://localhost:5432/bms_micronaut
     driverClassName: org.postgresql.Driver
     username: postgres
-    password: shrey
+    password: ${POSTGRES_PASSWORD:shrey}
     schema-generate: CREATE_DROP
     dialect: POSTGRES
 

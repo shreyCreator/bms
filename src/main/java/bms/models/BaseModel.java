@@ -2,6 +2,7 @@ package bms.models;
 
 import java.time.LocalDateTime;
 
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.data.annotation.DateCreated;
 import io.micronaut.data.annotation.DateUpdated;
 import lombok.Data;
@@ -10,9 +11,12 @@ import lombok.Data;
 public class BaseModel {
 
     @DateCreated
+    @Nullable
     private LocalDateTime createdAt;
     @DateUpdated
+    @Nullable
     private LocalDateTime updatedAt;
-    private boolean enabled = true;
+    @Nullable
+    private boolean isDeleted = false;
 
 }

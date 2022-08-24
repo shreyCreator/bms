@@ -52,7 +52,9 @@ micronaut {
         incremental(true)
         annotations("bms.*")
     }
+    
 }
+
 
 
 

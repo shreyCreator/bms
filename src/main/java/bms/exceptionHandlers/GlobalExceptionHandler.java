@@ -1,6 +1,7 @@
 package bms.exceptionHandlers;
 
 import bms.exceptions.TestException;
+import bms.exceptions.UserExistException;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
@@ -29,6 +30,14 @@ public class GlobalExceptionHandler {
 
         return HttpResponse.<String>serverError()
                 .body("Test exception"); //
+    }
+
+    @Error(exception = UserExistException.class, global = true) //
+    public HttpResponse<String> UserException(HttpRequest request, TestException e) {
+        log.info(e.getMessage());
+
+        return HttpResponse.<String>serverError()
+                .body("user already exists"); //
     }
 
 }
