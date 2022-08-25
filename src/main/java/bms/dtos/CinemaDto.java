@@ -12,8 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class CinemaDto {
 
-    private long showtime_id;
+    private int showtime_id;
     private String movie_name;
     private String cinema_name;
+    private String start_time;
+    private String end_time;
 
 }

@@ -18,7 +18,6 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-@MappedEntity
 public class CinemaModel extends BaseModel {
 
     @Id

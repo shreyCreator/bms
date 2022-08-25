@@ -12,7 +12,6 @@ import lombok.*;
 @RequiredArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-@MappedEntity
 public class CityModel extends BaseModel {
 
     @Id

@@ -13,7 +13,6 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Data
-@MappedEntity
 public class SeatModel extends BaseModel {
 
     @Id

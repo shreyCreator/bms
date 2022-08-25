@@ -19,7 +19,6 @@ import lombok.NonNull;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-@MappedEntity
 public class UserModel {
 
     @Id
@@ -27,13 +26,7 @@ public class UserModel {
     @NonNull
     private String email;
     @Nullable
-    private String firstName;
-    @Nullable
-    private String lastName;
-    @Nullable
     private String address;
-    @Nullable
-    private String phoneNo;
 
     @NotBlank
     @NonNull

@@ -26,6 +26,7 @@ dependencies {
      
       implementation("io.micronaut.sql:micronaut-jdbc-hikari")
         
+    implementation("io.micronaut.flyway:micronaut-flyway")
 
     compileOnly 'org.projectlombok:lombok:1.18.24'
 	annotationProcessor 'org.projectlombok:lombok:1.18.24'

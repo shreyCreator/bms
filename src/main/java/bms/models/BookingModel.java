@@ -17,7 +17,6 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-@MappedEntity
 public class BookingModel extends BaseModel {
 
     @Id

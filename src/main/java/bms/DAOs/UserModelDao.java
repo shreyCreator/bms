@@ -45,7 +45,7 @@ public class UserModelDao {
 
     public ResultSet getUserByEmail(String email) throws SQLException {
         Connection con = getPostgreConnection();
-        String FETCH_USER_EMAIL = "Select \"email\",\"password\" from \"user_model\" WHERE \"email\" ilike ?";
+        String FETCH_USER_EMAIL = "Select \"email\",\"password\" from \"user_table\" WHERE \"email\" ilike ?";
         PreparedStatement stmt = con.prepareStatement(FETCH_USER_EMAIL);
 
         stmt.setString(1, email.trim().toLowerCase());
@@ -77,14 +77,11 @@ public class UserModelDao {
             throw new UserExistException("user exist");
         }
         String hashedPass = encodePassword(user.getPassword());
-        String INSERT_USER = "INSERT INTO \"user_model\" (\"email\", \"first_name\", \"last_name\", \"address\",\"phone_no\",\"password\") VALUES (?, ?, ?, ?,?,?)";
+        String INSERT_USER = "INSERT INTO \"user_table\" (\"email\",  \"address\",\"password\") VALUES (?, ?, ?)";
         PreparedStatement stmt = con.prepareStatement(INSERT_USER);
         stmt.setString(1, user.getEmail());
-        stmt.setString(2, user.getFirstName());
-        stmt.setString(3, user.getLastName());
-        stmt.setString(4, user.getAddress());
-        stmt.setString(5, user.getPhoneNo());
-        stmt.setString(6, hashedPass);
+        stmt.setString(2, user.getAddress());
+        stmt.setString(3, hashedPass);
         int row = stmt.executeUpdate();
         con.close();
     }

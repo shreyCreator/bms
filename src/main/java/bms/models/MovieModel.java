@@ -18,7 +18,6 @@ import lombok.*;
 @RequiredArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
-@MappedEntity
 public class MovieModel extends BaseModel {
 
     @Id

@@ -15,7 +15,6 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Data
-@MappedEntity
 public class ShowTimeModel extends BaseModel {
 
     @Id
