@@ -38,8 +38,6 @@ public class AuthenticationProviderUserPassword implements
             String email = authenticationRequest.getIdentity().toString();
             String password = authenticationRequest.getSecret().toString();
             String enteredPass = userModelDao.getUserPassword(email);
-            System.out.println(getDecodedPassword(enteredPass));
-            System.out.println(password);
             if (enteredPass != "" && password.equals(getDecodedPassword(enteredPass))) {
                 emitter.next(AuthenticationResponse.success((String) authenticationRequest.getIdentity()));
                 emitter.complete();

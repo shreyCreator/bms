@@ -1,13 +1,13 @@
 package bms.exceptionHandlers;
 
+import java.sql.SQLException;
+
 import bms.exceptions.TestException;
 import bms.exceptions.UserExistException;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Error;
-import io.micronaut.http.hateoas.JsonError;
-import io.micronaut.http.hateoas.Link;
 import jakarta.inject.Singleton;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,6 +38,14 @@ public class GlobalExceptionHandler {
 
         return HttpResponse.<String>serverError()
                 .body("user already exists"); //
+    }
+
+    @Error(exception = SQLException.class, global = true) //
+    public HttpResponse<String> SQLException(HttpRequest request, SQLException e) {
+        log.info(e.getMessage());
+
+        return HttpResponse.<String>serverError()
+                .body("some sql exception occ"); //
     }
 
 }

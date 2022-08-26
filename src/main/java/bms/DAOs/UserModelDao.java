@@ -28,41 +28,31 @@ public class UserModelDao {
 
     public ResultSet getUser(String email) throws SQLException {
         Connection con = getPostgreConnection();
-        String FETCH_USER_EMAIL = "Select \"email\",\"password\",\"first_name\",\"last_name\",\"address\",\"phone_no\" from \"user_model\" WHERE \"email\" ilike ?";
+        String FETCH_USER_EMAIL = "Select \"email\",\"password\",\"address\" from \"user_table\" WHERE \"email\" ilike ?";
         PreparedStatement stmt = con.prepareStatement(FETCH_USER_EMAIL);
 
         stmt.setString(1, email.trim().toLowerCase());
 
         ResultSet rst = stmt.executeQuery();
         boolean doesUserExist = rst.next();
+        System.out.println(doesUserExist);
         if (doesUserExist) {
-            rst.next();
             return rst;
         }
-        return rst;
-
-    }
-
-    public ResultSet getUserByEmail(String email) throws SQLException {
-        Connection con = getPostgreConnection();
-        String FETCH_USER_EMAIL = "Select \"email\",\"password\" from \"user_table\" WHERE \"email\" ilike ?";
-        PreparedStatement stmt = con.prepareStatement(FETCH_USER_EMAIL);
-
-        stmt.setString(1, email.trim().toLowerCase());
-
-        ResultSet rst = stmt.executeQuery();
+        rst.close();
         return rst;
 
     }
 
     public String getUserPassword(String email) {
 
-        try (ResultSet user = getUserByEmail(email)) {
-            if (user.next()) {
+        try (ResultSet rst = getUser(email)) {
+            if (rst.isClosed()) {
 
-                return user.getString("password");
+                throw new UserExistException("Invalid credentials");
             }
-            throw new UserExistException("user does not exist");
+
+            return rst.getString("password");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,10 +62,7 @@ public class UserModelDao {
 
     public void saveUser(UserModel user) throws SQLException {
         Connection con = getPostgreConnection();
-        ResultSet rst = getUserByEmail(user.getEmail());
-        if (rst.next()) {
-            throw new UserExistException("user exist");
-        }
+        doesUserExist(user);
         String hashedPass = encodePassword(user.getPassword());
         String INSERT_USER = "INSERT INTO \"user_table\" (\"email\",  \"address\",\"password\") VALUES (?, ?, ?)";
         PreparedStatement stmt = con.prepareStatement(INSERT_USER);
@@ -83,7 +70,15 @@ public class UserModelDao {
         stmt.setString(2, user.getAddress());
         stmt.setString(3, hashedPass);
         int row = stmt.executeUpdate();
+        stmt.close();
         con.close();
+    }
+
+    private void doesUserExist(UserModel user) throws SQLException {
+        ResultSet rst = getUser(user.getEmail());
+        if (!rst.isClosed()) {
+            throw new UserExistException("user exist");
+        }
     }
 
     String encodePassword(String password) {

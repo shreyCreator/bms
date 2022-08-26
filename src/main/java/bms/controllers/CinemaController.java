@@ -1,6 +1,7 @@
 
 package bms.controllers;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import bms.dtos.CinemaDto;
@@ -18,7 +19,7 @@ public class CinemaController {
     CinemaService cinemaService;
 
     @Get("/{movie_id}/cinemas")
-    public List<CinemaDto> saveUser(int movie_id) throws Exception {
+    public List<CinemaDto> saveUser(int movie_id) throws SQLException {
         return cinemaService.getCinemaByMovieId(movie_id);
 
     }

@@ -1,5 +1,6 @@
 package bms.services;
 
+import bms.DAOs.MovieDao;
 import bms.DAOs.UserModelDao;
 import bms.Validators.EmailValidator;
 import bms.exceptions.UserExistException;
@@ -14,6 +15,7 @@ public class UserService {
     EmailValidator emailValidator;
 
     public String saveUser(UserModel user) throws Exception {
+
         if (emailValidator.isEmailValid(user.getEmail())) {
             userModelDao.saveUser(user);
         } else {

@@ -1,13 +1,10 @@
 
 package bms.controllers;
-
-import bms.exceptions.TestException;
 import bms.services.HeartBeatService;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import jakarta.inject.Inject;
 import io.micronaut.security.annotation.Secured;
-import io.micronaut.security.authentication.AuthorizationException;
 import io.micronaut.security.rules.SecurityRule;
 import java.lang.String;
 
