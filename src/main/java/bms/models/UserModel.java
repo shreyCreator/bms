@@ -32,10 +32,4 @@ public class UserModel {
     @NonNull
     private String password;
 
-    @PrePersist
-    void encodePassword() {
-        this.password = Base64.getEncoder()
-                .encodeToString(this.password.getBytes(StandardCharsets.UTF_8));
-    }
-
 }

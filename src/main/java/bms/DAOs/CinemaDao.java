@@ -39,23 +39,25 @@ public class CinemaDao {
         stmt.setInt(1, movie_id);
         ResultSet rst = stmt.executeQuery();
 
-        List<CinemaDto> listOfCinemaWithShowTime = new ArrayList<>();
-        while (rst.next()) {
-            CinemaDto cinema = getCinemaDto(rst);
-            listOfCinemaWithShowTime.add(cinema);
-        }
-        return listOfCinemaWithShowTime;
+        return getListOfCinemaDto(rst);
 
     }
 
-    private CinemaDto getCinemaDto(ResultSet rst) throws SQLException {
-        CinemaDto cinema = new CinemaDto();
-        cinema.setCinema_name(rst.getString("cinema_name"));
-        cinema.setMovie_name(rst.getString("movie_name"));
-        cinema.setEnd_time(rst.getString("end_time"));
-        cinema.setStart_time(rst.getString("start_time"));
-        cinema.setShowtime_id(rst.getInt("showtime_id"));
-        return cinema;
+    private List<CinemaDto> getListOfCinemaDto(ResultSet rst) throws SQLException {
+
+        List<CinemaDto> listOfCinemaWithShowTime = new ArrayList<>();
+        while (rst.next()) {
+
+            CinemaDto cinema = new CinemaDto();
+            cinema.setCinema_name(rst.getString("cinema_name"));
+            cinema.setMovie_name(rst.getString("movie_name"));
+            cinema.setEnd_time(rst.getString("end_time"));
+            cinema.setStart_time(rst.getString("start_time"));
+            cinema.setShowtime_id(rst.getInt("showtime_id"));
+
+            listOfCinemaWithShowTime.add(cinema);
+        }
+        return listOfCinemaWithShowTime;
     }
 
 }
