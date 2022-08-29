@@ -28,14 +28,13 @@ public class UserModelDao {
 
     public ResultSet getUser(String email) throws SQLException {
         Connection con = getPostgreConnection();
-        String FETCH_USER_EMAIL = "Select \"email\",\"password\",\"address\" from \"user_table\" WHERE \"email\" ilike ?";
+        String FETCH_USER_EMAIL = "Select \"id\",\"email\",\"password\",\"address\" from \"user_table\" WHERE \"email\" ilike ?";
         PreparedStatement stmt = con.prepareStatement(FETCH_USER_EMAIL);
 
         stmt.setString(1, email.trim().toLowerCase());
 
         ResultSet rst = stmt.executeQuery();
         boolean doesUserExist = rst.next();
-        System.out.println(doesUserExist);
         if (doesUserExist) {
             return rst;
         }
@@ -57,6 +56,18 @@ public class UserModelDao {
             e.printStackTrace();
         }
         return "";
+
+    }
+    public int getUserId(String email) {
+
+        try (ResultSet rst = getUser(email)) {
+
+
+            return rst.getInt("id");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
 
     }
 

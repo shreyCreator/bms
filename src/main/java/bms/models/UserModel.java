@@ -18,18 +18,12 @@ import lombok.NonNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class UserModel {
 
-    @Id
-    @NotBlank
-    @NonNull
     private String email;
-    @Nullable
+
     private String address;
 
-    @NotBlank
-    @NonNull
     private String password;
 
 }
