@@ -5,6 +5,7 @@ import bms.DAOs.SeatDao;
 import bms.DAOs.UserModelDao;
 import bms.dtos.BookingResponseDto;
 import bms.dtos.SeatDto;
+import bms.utils.Base64Decoder;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import io.micronaut.security.authentication.AuthenticationRequest;
 import jakarta.inject.Inject;
@@ -66,8 +67,8 @@ public class BookingService {
     }
     private String getUserEmail(String authHeader) {
         String headerContent=authHeader.split(" ")[1];
-        byte[] decoded = Base64.getDecoder().decode(headerContent);
-        String decodedHeader = new String(decoded, StandardCharsets.UTF_8);
+
+        String decodedHeader = Base64Decoder.decode(headerContent);
         String[] userPass=decodedHeader.split(":");
         return  userPass[0];
 
