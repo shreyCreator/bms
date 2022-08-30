@@ -1,21 +1,30 @@
 package bms.config;
 
-import io.micronaut.runtime.context.env.ConfigurationAdvice;
+import io.micronaut.context.annotation.Value;
+import jakarta.inject.Singleton;
 
-@ConfigurationAdvice
+@Singleton
 public class PropertiesConfiguration {
 
+    @Value("${datasources.default.url}")
+        private String url;
+    @Value("${datasources.default.username}")
+    private String dbName;
+    @Value("${datasources.default.password}")
+    private String dbPass;
     public String getConnectionUrl() {
-        return "jdbc:postgresql://localhost:5432/bms_micronaut";
+
+        return url;
     }
 
     public String getDbUsername() {
-        return "postgres";
+
+        return dbName;
 
     }
 
     public String getDbPassword() {
-        return "shrey";
+        return dbPass;
     }
 
 }
