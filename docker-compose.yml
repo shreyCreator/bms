@@ -1,0 +1,31 @@
+version: '3'
+services:
+#  db:
+#    image: postgres
+#    environment:
+#      - POSTGRES_DB=${DB_NAME}
+#      - POSTGRES_USER=${DB_USER}
+#      - POSTGRES_PASSWORD=${DB_PASSWORD}
+#    volumes:
+#      - dev-db-data:/var/lib/postgresql/data
+#    ports:
+#      - "5432:5432"
+  api:
+    build: .
+    container_name: team_omega_c
+    volumes:
+      - .:/team_omega
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=localhost
+      - DB_NAME=bms_micronat
+      - DB_USER=postgres
+      - DB_PASSWORD=shrey
+#    depends_on:
+#      - db
+
+
+volumes:
+  dev-db-data:
+

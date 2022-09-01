@@ -6,11 +6,11 @@ import jakarta.inject.Singleton;
 @Singleton
 public class PropertiesConfiguration {
 
-    @Value("${datasources.default.url}")
+//    @Value("${datasources.default.url}")
         private String url;
-    @Value("${datasources.default.username}")
+//    @Value("${datasources.default.username}")
     private String dbName;
-    @Value("${datasources.default.password}")
+//    @Value("${datasources.default.password}")
     private String dbPass;
     public String getConnectionUrl() {
 
