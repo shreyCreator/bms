@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: postgres:alpine
+    volumes:
+      - dev-db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  api:
+    build: .
+    container_name: micronaut
+
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    
+
+volumes:
+  dev-db-data:
