@@ -10,7 +10,7 @@ public class SeatService {
     @Inject
     SeatDao seatDao;
 
-    public List<SeatDto> getCinemaByMovieId(int show_time_id) throws SQLException {
+    public List<SeatDto> getAvailableSeatByShowTimeId(int show_time_id) throws SQLException {
         return seatDao.getAvailableSeatByShowTimeId(show_time_id);
     }
 
